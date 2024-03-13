@@ -1,0 +1,108 @@
+﻿@model SuggestionSystem.Models.Search
+<style>
+    body {
+        font-family: Tahoma;
+        font-size: larger
+    }
+    span {
+        color: red;
+        font-size: small
+    }
+</style>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div>
+
+    </div>
+    <div class="row col-md-6 col-lg-offset-3">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div style="text-align:center">
+                    <div class="alert alert-warning">
+                        <i class="fa fa-hand-o-left animated"></i>
+                        چنانچه کلمه عبور خود را فرآموش کرده اید لطفا کلیلک کنید
+                        <div class="login-button" style="text-align:center">
+                            <a href="@Url.Action("SendCode", "PersonProfiles",new { @class ="btn btn-larg" }) " class="elements">
+                                <span class="glyphicon glyphicon-phone faa-pulse  animated  fa-2x" style="color:#106641"> </span>
+                            </a>
+                            <i class="fa fa-hand-o-right"></i>
+
+                        </div>
+                    </div>
+                    <i class="fa fa-hand-o-left faa-pulse  animated"></i> <b>@Html.ActionLink("..: لطفابرای دریافت آيين نامه اجراي نظام پذيرش و بررسي پيشنهادها کلیک کنید :.. ", "SaveDocument", "PersonProfiles")</b>  <i class="fa fa-hand-o-right faa-pulse  animated"></i>
+                </div>
+            </div>
+                <div class="panel-body">
+                    
+                    @if (ViewBag.Error != null)
+
+                    {
+                        <div class="alert alert-danger">
+                            <h5>
+                                @ViewBag.Error
+                            </h5>
+                        </div>
+                    }
+                    @if (TempData["Message"] != null)
+                    {
+                        <div class="alert alert-danger">
+                            <h5>
+                                @TempData["Message"]
+                            </h5>
+                        </div>
+                    }
+
+                    <div class="col-md-12">
+                        <div class="login-button" style="text-align:center">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <span style="color:#a70808" class="icon-star-empty "> </span>
+                        کد ملی
+                        <div class="input-group" style="margin-bottom: 10px">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user-circle fa-2x">
+                                </i>
+                            </span>
+                            @Html.TextBoxFor(model => model.NationalCode, new { @class = "form-control input-lg", placeholder = "  کد ملی    " })
+                        </div>
+                        <b>
+                            @Html.ValidationMessageFor(model => model.NationalCode, "", new { @class = "text-danger" })
+                        </b>
+                    </div>
+                    <div class="col-md-12">
+                        <span style="color:#a70808" class="icon-star-empty "> </span>
+                        کلمه عبور
+                        <div class="input-group" style="margin-bottom: 10px">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user-circle fa-2x">
+                                </i>
+                            </span>
+                            @Html.PasswordFor(model => model.Securitycode, new { @class = "form-control input-lg required", placeholder = " کلمه عبور" })
+                        </div>
+                        <b>
+                            @Html.ValidationMessageFor(model => model.Securitycode, "", new { @class = "text-danger" })
+                        </b>
+                    </div>
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-large btn-block blue">ورود   <i class=" fa fa-arrow-left"></i></button>
+                    </div>
+                    <div class="col-md-12">
+                        <i class="fa fa-hand-o-left animated"></i>
+                        چنانچه در سامانه ثبت نام نشده اید لطفا کلیک کنید.
+                        <div class="login-button" style="text-align:center">
+                            <a href="@Url.Action("Create", "PersonProfiles",new { @class ="btn btn-larg" }) " class="elements">
+                                <span class="fas fa-user-plus   fa-2x" style="color:#106641"> </span>
+                            </a>
+                            <i class="fa fa-hand-o-right faa-ring  animated"></i>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+}
+

@@ -1,0 +1,440 @@
+﻿@model IEnumerable<SuggestionSystem.Models.SuggestProfilVm>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/jquery.Bootstrap-PersianDateTimePicker.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
+<script src="~/Scripts/calendar.js"></script>
+<script src="~/Scripts/jquery.Bootstrap-PersianDateTimePicker.js"></script>
+<style>
+
+    .IsBold {
+        background: #f8f278 !important;
+        color: #000000;
+    }
+</style>
+<div class="col-md-12 ">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            @using (Html.BeginForm("Index", "SuggestProfils"))
+            {
+
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="row mstyle">
+
+                </div>
+                <div class="row mstyle">
+
+                    <div class="col-md-2">
+                        تاریخ ثبت پیشنهاد
+                        <div class="form-group" style="font-family:'B Nazanin' ">
+                            <div class="input-group">
+                                <div class="input-group-addon" data-mddatetimepicker="true" data-trigger="click" data-targetselector="#fromDate1" data-groupid="group1" data-fromdate="true" data-enabletimepicker="false" data-placement="left">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </div>
+                                <input type="text" class="form-control" id="fromDate1" placeholder="از تاریخ" data-mddatetimepicker="true" data-trigger="click" data-targetselector="#fromDate1" data-groupid="group1" data-fromdate="true" data-enabletimepicker="false" data-placement="right" value="@ViewBag.fromDate1" name="Date1" />
+                            </div>
+
+                            <div class="input-group">
+                                <div class="input-group-addon" data-mddatetimepicker="true" data-trigger="click" data-targetselector="#toDate1" data-groupid="group1" data-todate="true" data-enabletimepicker="true" data-placement="left">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </div>
+                                <input type="text" class="form-control" id="toDate1" placeholder="تا تاریخ" data-mddatetimepicker="true" data-trigger="click" data-targetselector="#toDate1" data-groupid="group1" data-todate="true" data-enabletimepicker="false" data-placement="right" value="@ViewBag.toDate1" name="Date2" />
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-2">
+                        مدرک تحصیلی
+                        @Html.DropDownList("DegreeId", null, " --مدرک تحصیلی -- ", new { @placeholder = " ", @class = "form-control input-lg required" })
+                    </div>
+                    
+                    <div class="col-md-2">
+                        پیشنهاد دهنده
+                        @Html.DropDownList("ID_MemType", null, " --پیشنهاد دهنده  -- ", new { @placeholder = " ", @class = "form-control input-lg required" })
+                    </div>
+
+                    <div class="col-md-2">
+                        وضعیت پیشنهاد
+                        @Html.DropDownList("ID_SuggestType", null, " --وضعیت پیشنهاد  -- ", new { @placeholder = " ", @class = "form-control input-lg required" })
+                    </div>
+                </div>
+                <div class="row">
+
+                </div>
+                <div class="row mstyle">
+                   
+                </div>
+                <div class="row">
+                    <hr />
+                    <div class="col-md-6">
+                        <div style="float:left">
+                            <input type="submit" class="btn btn-success" value="جستجو" />|
+                            <div style="float:left">
+                                <button id="btnClear" class="btn btn-danger">
+                                    حذف فیلتر
+                                    <i class="fa fa-filter"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="panel-body">
+            @if (ViewBag.Message!=null)
+            {
+                @ViewBag.Message
+            }
+            <div class="table-responsive">
+                <table id="example6" class="table table-bordered table-striped   table-responsive">
+                    <thead>
+                        <tr>
+                            <th># </th>
+                            <th>فایل های پیوست</th>
+                            <th>خلاصه وضعیت پیشنهاد  </th>
+                            <th> نام  و نام خانوادگی  </th>
+                            <th>   نوع  </th>
+                            <th> پست   </th>
+                            <th>تلفن    </th>
+                            <th>  تاریخ ثبت پیشنهاد  </th>
+                            <th>عنوان پپیشنهاد     </th>
+                            <th>وضعیت مطلوب(شرح  پپیشنهاد)     </th>
+                            <th>  وضعیت موجود        </th>
+                            <th> وضعیت پیشنهاد      </th>
+                            <th> ثبت و ویرایش نظر دبیرخانه     </th>
+                            <th> ثبت و ویرایش نظر داوران     </th>
+                            <th>  پرینت         </th>
+                            <th>      پنل کاربر     </th>
+                            <th> حذف سطر         </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            string prclass = "";
+                            if (item.IsEdited == true)
+                            {
+                                prclass = "IsBold";
+                            }
+                            <tr class="@prclass">
+                                <td></td>
+                                <td>
+                                    <a href="@Url.Action("UploadDocNew", "FileUploads",new { id=item.SuggestId,PProfileId=item.PersonProfileId} )" class=" " role="button"><i class="glyphicon glyphicon-picture fa-2x" style="color:#91c77a"></i></a>
+                                    @if (item.payvast>0)
+	{
+                                    <b>
+                                       دارد
+
+                                    </b>
+                                    }
+                                    else
+                                    {
+                                        <b>ندارد</b>
+                                    }
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("ViewDetails", "SuggestProfils", new { id=item.SuggestId})" class="data-modal " role="button"><i class="fas fa-eye fa-2x" style="color:#0ec4ae"></i>   </a>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PersonProfile.FullName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PersonProfile.MemberType.Title)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PersonProfile.PostOrgans)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PersonProfile.Mobile)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DateInsert)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SuggestTitle)
+                                </td>
+                                <td>
+                                    @{
+                                        string SuggestNote = item.SuggestNote;
+                                        if (SuggestNote != null)
+                                        {
+                                            if (SuggestNote.Length > 25)
+                                            {
+                                                SuggestNote = SuggestNote.Substring(0, 25);
+                                                @SuggestNote
+                                    <a href="@Url.Action("SuggestNote", "SuggestProfils",new { id=item.SuggestId} )" class="data-modal Mystyle2" role="button">(ادامه ...)</a>
+
+                                            }
+                                            else
+                                            {
+                                                @SuggestNote
+                                            }
+                                        }
+
+                                    }
+
+                                </td>
+                               
+                                <td>
+                                    @{
+                                        string CurrentSituationNote = item.CurrentSituationNote;
+                                        if (CurrentSituationNote != null)
+
+                                        {
+                                            if (CurrentSituationNote.Length > 25)
+                                            {
+                                                CurrentSituationNote = CurrentSituationNote.Substring(0, 25);
+                                                @CurrentSituationNote
+                                                <a href="@Url.Action("CurrentSituationNote", "SuggestProfils",new { id=item.SuggestId} )" class="data-modal Mystyle2" role="button">(ادامه ...)</a>
+
+                                            }
+                                            else
+                                            {
+                                                @CurrentSituationNote
+                                            }
+                                        }
+
+                                    }
+
+                                </td>
+                                <td>
+                                    @item.LastState
+                                </td>
+                                <td>
+                                    @{
+                                        var DateInsert = item.DateInsert;
+                                        var TimeInsert = item.TimeInsert;
+                                        var d2 = SuggestionSystem.Utility.PertionDate.CalculateDate(DateInsert, TimeInsert);
+                                        var d1 = DateTime.Now;
+                                        int REsult = DateTime.Compare(d2, d1);
+                                    }
+                                  
+                                    <a href="@Url.Action("CreateSecretariate", "SuggestProfils", new { id=item.SuggestId})" class=" data-modal Mystyle2" role="button"><i class="fas fa-plus-circle fa-2x" style="color:#0094ff"></i></a>
+                                   
+                                </td>
+                                <td>
+                                 
+                                    @if (item.Count > 0)
+                                    {
+                                        <a href="@Url.Action("CreatReferee", "SuggestProfils", new { id=item.SuggestId})" class="data-modal Mystyle2" role="button"><i class="fas fa-plus-circle fa-2x" style="color:#b7095a"></i></a>
+
+                                    }
+                                    else
+                                    {
+                                        <i class="fas fa-plus-circle fa-2x" style="color:#a4a2a2"></i>
+
+                                    }
+                                 
+                                </td>
+
+                                <td>
+                                    <a href="@Url.Action("Print", "SuggestProfils", new { id=item.SuggestId})" class=" Mystyle2" role="button"><i class="fas fa-print fa-2x" style="color:#2f860a"></i></a>
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Details", "PersonProfiles", new { id=item.PersonProfile.PersonProfileId})" class=" Mystyle2" role="button"><i class="fas fa-list-ol fa-2x"></i></a>
+                                </td>
+                                <td>
+                                    <a style="color:#a90909" href="@Url.Action("Delete", "SuggestProfils", new { id=item.SuggestId})" class="data-modal far fa-trash-alt fa-2x" role="button"> </a>
+                                </td>
+
+                                <td></td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        $('#btnClear').click(function () {
+            if (confirm("آیا مایل به حذف فیلتر هستید؟")) {
+                $('input[type="text"]').val('');
+                $("#ID_SuggestType")[0].selectedIndex = 0;
+                $("#PostId")[0].selectedIndex = 0;
+                $("#ID_MemType")[0].selectedIndex = 0;
+                $("#ID_MemType")[0].selectedIndex = 0;
+                $("#TitleListId")[0].selectedIndex = 0;
+                $("#UnitTypeId")[0].selectedIndex = 0;
+                $("#DegreeId")[0].selectedIndex = 0;
+                $("#ID_DomainOfUsage")[0].selectedIndex = 0;
+                //Reset();
+            }
+        });
+    });
+    
+     $(document).ready(function () {
+        var t = $('#example6').DataTable({
+
+            'paging': true,
+            'lengthChange': true,
+            'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': true,
+            "pageLength": 5,
+            //"responsive": true,
+            "lengthMenu": [5, 10, 25, 50, "All"],
+            "language": {
+                select: {
+                    rows: "%d سطرانتخاب شده "
+                },
+
+                "sEmptyTable": "هیچ داده‌ای در جدول وجود ندارد",
+                "sInfo": "نمایش _START_ تا _END_ از _TOTAL_ ردیف",
+                "sInfoEmpty": "نمایش 0 تا 0 از 0 ردیف",
+                "sInfoFiltered": "(فیلتر شده از _MAX_ ردیف)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ",",
+                "sLengthMenu": "نمایش _MENU_ ردیف",
+                "sLoadingRecords": "در حال بارگزاری...",
+                "sProcessing": "در حال پردازش...",
+                "sSearch": "جستجو:",
+                "sZeroRecords": "رکوردی با این مشخصات پیدا نشد",
+
+                "oPaginate": {
+                    "sFirst": "برگه‌ی نخست",
+                    "sLast": "برگه‌ی آخر",
+                    "sNext": "بعدی",
+                    "sPrevious": "قبلی"
+                },
+                "oAria": {
+                    "sSortAscending": ": فعال سازی نمایش به صورت صعودی",
+                    "sSortDescending": ": فعال سازی نمایش به صورت نزولی"
+                },
+
+            },
+            'stateSave': true,
+
+            dom: 'Bfrtip',
+            columnDefs: [
+                {
+                    targets:1,
+                    className: 'noVis',
+                   
+                },
+                { "width": "400px", "targets": "_all" }
+            ],
+            buttons: [
+                'pageLength',
+                'copy', 
+                {
+
+                    extend: 'print',
+                    text: 'پرینت',
+                    exportOptions: {
+                        columns: ':visible'
+                    },
+                    customize: function (win) {
+                        $(win.document.body)
+                            .css('font-size', '10pt')
+                            .prepend(
+                                //'<img src="http://datatables.net/media/images/logo-fade.png" style="position:absolute; top:0; left:0;" />'
+                            );
+
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                    }
+                }
+                 ,
+                {
+                    extend: 'colvis',
+                    columns: ':not(.noVis)',
+                    text: 'تغییر ستونها',
+                    collectionLayout: 'fixed three-column'
+                }
+
+               //{
+               //    extend: 'colvis',
+               //    text: 'تغییر ستونها',
+
+               //    collectionLayout: 'fixed three-column'
+               //}
+            ],
+
+            
+            //initComplete: function () {
+            //    this.api().columns().every(function () {
+            //        var column = this;
+            //        var select = $('<select><option value=""></option></select>')
+            //            .appendTo($(column.footer()).empty())
+            //            .on('change', function () {
+            //                var val = $.fn.dataTable.util.escapeRegex(
+            //                    $(this).val()
+            //                );
+
+            //                column
+            //                    .search(val ? '^' + val + '$' : '', true, false)
+            //                    .draw();
+            //            });
+
+            //        column.data().unique().sort().each(function (d, j) {
+            //            select.append('<option value="' + d + '">' + d + '</option>')
+            //        });
+            //    });
+            //},
+            select: true
+        }); t.on('order.dt search.dt', function () {
+            t.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+                cell.innerHTML = i + 1;
+            });
+        }).draw();
+        $('a.toggle-vis').on('click', function (e) {
+            e.preventDefault();
+
+            // Get the column API object
+            var column = table.column($(this).attr('data-column'));
+
+            // Toggle the visibility
+            column.visible(!column.visible());
+        });
+        //t.columns('.detail').visible(false);
+    });
+</script>
+<script>
+
+    var customOptions = {
+        placeholder: "روز / ماه / سال"
+        , twodigit: true
+        , closeAfterSelect: true
+        , nextButtonIcon: "fa fa-arrow-circle-right"
+        , previousButtonIcon: "fa fa-arrow-circle-left"
+        , buttonsColor: "blue"
+        , forceFarsiDigits: true
+        , markToday: true
+        , markHolidays: true
+        , highlightSelectedDay: true
+        , sync: true
+        , gotoToday: true
+    }
+    kamaDatepicker('date2', customOptions);
+    kamaDatepicker('date7', customOptions);
+    kamaDatepicker('date8', customOptions);
+
+    $("#date2").val("1311/10/01");
+</script>

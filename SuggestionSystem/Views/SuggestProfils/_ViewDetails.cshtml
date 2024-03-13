@@ -1,0 +1,272 @@
+﻿@model SuggestionSystem.Models.SuggestProfilVm
+@{ 
+    var Sugg =(IEnumerable<SuggestionSystem.Models.SuggProfile_SuggType_Interface>)ViewBag.SuggProfile_SuggType_Interface;
+}
+<style>
+    .m1 {
+        color: #0e59aa;
+        font-size: medium
+    }
+    .contract {
+        background-color: #ff6a00
+    }
+    .Mystyle3 {
+        color: #d8ad07
+    }
+    .Mystyle4 {
+        color: #310986;
+        direction: rtl;
+        text-align: justify;
+        text-justify: inter-word;
+    }
+    .Mystyle {
+        color: #0ec30c;
+        text-align: justify;
+        text-justify: inter-word;
+        direction: rtl
+    }
+    .Mystyle5 {
+        color: #310986;
+        text-align: justify;
+       direction:rtl
+    }
+    .Mystyle6 {
+        color: #ff0000;
+        text-align: justify;
+        text-justify: inter-word;
+        text-align: right;
+        direction: rtl
+    }
+    .Mystyle8 {
+        color: #a01cdd;
+        text-align: justify;
+        text-justify: inter-word;
+        text-align: right;
+        direction: rtl
+    }
+    .Mystyle7 {
+        color: #ff6a00
+    }
+</style>
+    <div class="modal-header Mystyle2">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <p class="modal-title Mheader" id="myModalLabel"><h3 style="color:white">..:خلاصه وضعیت پیشنهاد:..
+               </h3>
+        </p>
+        <p>
+            <h6 style="color:white">@Model.SuggestTitle</h6>
+        </p>
+    </div>
+@using (Html.BeginForm())
+{
+    <div class="modal-body">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div class="form-horizontal">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div>
+                        <dl class="dl-horizontal">
+
+                            <dt class="Mystyle3">
+                                @Html.DisplayNameFor(model => model.FullName)
+                            </dt>
+                            <dd class="Mystyle3">
+                                @Html.DisplayFor(model => model.FullName) &nbsp;&nbsp;&nbsp; @Html.DisplayFor(model => model.Title_MemberType) &nbsp;&nbsp;&nbsp; @Html.DisplayFor(model => model.Title_Post)
+                            </dd>
+                            <dt class="Mystyle3">
+                                @Html.DisplayNameFor(model => model.Title_Degree)
+                            </dt>
+
+                            <dd class="Mystyle3">
+                                @Html.DisplayFor(model => model.Title_Degree)  &nbsp;&nbsp;&nbsp; @Html.DisplayFor(model => model.Reshte)
+                            </dd>
+
+                            <dt class="Mystyle3">
+                                @Html.DisplayNameFor(model => model.Mobile)
+                            </dt>
+
+                            <dd class="Mystyle3">
+                                @Html.DisplayFor(model => model.Mobile)
+                            </dd>
+                            <dt class="Mystyle3">
+                                پست
+                            </dt>
+
+                            <dd class="Mystyle3">
+                                @Html.DisplayFor(model => model.PostOrgans)
+                            </dd>
+
+                            <dt>
+                                <hr />
+                            </dt>
+                            <dd>
+                                <hr />
+
+                            </dd>
+                            <dt class="Mystyle8">
+                                @Html.DisplayNameFor(model => model.SuggestTitle)
+                            </dt>
+                            <dd class="Mystyle8">
+                                @Html.DisplayFor(model => model.SuggestTitle)
+                            </dd>
+                            <dt class="Mystyle4">
+                                @Html.DisplayNameFor(model => model.SuggestNote)
+                            </dt>
+
+                            <dd class="Mystyle4">
+                                @Html.DisplayFor(model => model.SuggestNote)
+                            </dd>
+                            <dt class="Mystyle4">
+                                @Html.DisplayNameFor(model => model.CurrentSituationNote)
+                            </dt>
+
+                            <dd class="Mystyle4">
+                                @Html.DisplayFor(model => model.CurrentSituationNote)
+                            </dd>
+                            <dt class="Mystyle4">
+                                @Html.DisplayNameFor(model => model.Cost)
+                            </dt>
+
+                            <dd class="Mystyle4">
+                                @Html.DisplayFor(model => model.Cost)
+                            </dd>
+
+                            <dt class="Mystyle4">
+                                @Html.DisplayNameFor(model => model.Result)
+                            </dt>
+
+                            <dd class="Mystyle4">
+                                @Html.DisplayFor(model => model.Result)
+
+                            </dd>
+                            <dt class="Mystyle4">
+                                @Html.DisplayNameFor(model => model.PeriodOfTime)
+                            </dt>
+
+                            <dd class="Mystyle4">
+                                @Html.DisplayFor(model => model.PeriodOfTime)
+
+                            </dd>
+                            <dt class="Mystyle4">
+                                @Html.DisplayNameFor(model => model.Benefits)
+                            </dt>
+
+                            <dd class="Mystyle4">
+                                @Html.DisplayFor(model => model.Benefits)
+
+                            </dd>
+                            <dt class="Mystyle4">
+                                @Html.DisplayNameFor(model => model.Equipment)
+                            </dt>
+
+                            <dd class="Mystyle4">
+                                @Html.DisplayFor(model => model.Equipment)
+
+                            </dd>
+                            <dt class="Mystyle4">
+                            </dt>
+
+                            <dd class="Mystyle4">
+
+                            </dd>
+
+                            @foreach (var item in Sugg)
+                            {
+
+                                
+                                <dt>
+                                    <hr />
+                                </dt>
+                                <dd>
+                                    <hr />
+
+                                </dd>
+
+                                <dt class="Mystyle6">
+                                    @Html.DisplayNameFor(model => item.Note_Secretariate)
+                                </dt>
+
+                                <dd class="Mystyle6">
+                                    @Html.DisplayFor(model => item.Note_Secretariate)
+
+                                </dd>
+                                <dt class="Mystyle6">
+                                   وضعیت پیشنهاد- دبیرخانه 
+                                </dt>
+
+                                <dd class="Mystyle6">
+                                    @Model.Title_SuggestType_Secretariate
+
+                                </dd>
+
+                                <dt>
+                                    <hr />
+                                </dt>
+                                <dd>
+                                    <hr />
+
+                                </dd>
+                                <dt class="Mystyle">
+                                    @Html.DisplayNameFor(model => item.Date_Referee)
+                                </dt>
+
+                                <dd class="Mystyle">
+                                    @Html.DisplayFor(model => item.Date_Referee)
+                                </dd>
+                                <dt class="Mystyle">
+                                    @Html.DisplayNameFor(model => item.LetterNumber)
+                                </dt>
+
+                                <dd class="Mystyle">
+                                    @Html.DisplayFor(model => item.LetterNumber)
+                                </dd>
+
+                                <dt class="Mystyle">
+                                    @Html.DisplayNameFor(model => item.Note_Referee)
+                                </dt>
+
+                                <dd class="Mystyle">
+                                    @Html.DisplayFor(model => item.Note_Referee)
+                                </dd>
+                                <dt class="Mystyle">
+                                    وضعیت پیشنهاد- داوران
+                                </dt>
+
+                                <dd class="Mystyle">
+                                @ViewBag.SuggTypeRefree
+
+                                </dd>
+                                <dt class="Mystyle">
+                                    <b>
+                                        @Html.DisplayNameFor(model => item.Point)
+                                    </b>
+                                </dt>
+
+                                <dd class="Mystyle">
+                                    <b>
+                                        @Html.DisplayFor(model => item.Point)
+                                    </b>
+                                </dd>
+
+                            }
+
+                        </dl>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <span id="progress" class="text-center" style="display: none;">
+            <img src="~/Content/Images/Wait.gif" alt="wiat" />
+            Wait..
+        </span>
+
+        <button class="btn btn-info" type="button" data-dismiss="modal">تایید</button>
+    </div>
+}
+

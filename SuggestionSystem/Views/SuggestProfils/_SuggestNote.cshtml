@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "..::..";
+    var Note = ViewBag.List;
+}
+
+<div class="modal-header Mheader ">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <p class="modal-title Mheader" id="myModalLabelEP">    <h4> </h4></p>
+</div>
+<style>
+    .Mheader {
+        color: white;
+        text-align: center;
+        font-family: Tahoma;
+        font-size: large;
+        background-color: #bce8f1;
+        border-color: #bce8f1;
+    }
+
+    .ch {
+        color: darkred;
+    }
+
+    span {
+        color: red
+    }
+</style>
+<div class="modal-body">
+    <div class="form-horizontal">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <b>
+                    @Note
+
+                </b>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="modal-footer">
+        <span id="progress" class="text-center" style="display: none;">
+            <img src="~/Content/Images/Wait.gif" alt="wiat" />
+            Wait..
+        </span>
+        <button class="btn" type="button" data-dismiss="modal">بستن</button>
+    </div>

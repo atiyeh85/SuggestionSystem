@@ -1,0 +1,351 @@
+﻿@model SuggestionSystem.Models.SuggProfile_TitleVm
+@{
+    ViewBag.Title = "..::..";
+    var Id = ViewBag.Id;
+    var typeId = ViewBag.typeId;
+}
+
+@using (Html.BeginForm("Create", "SuggestProfils", FormMethod.Post))
+
+{
+    <input type="text" id="Id" name="Id" value="@Id"  hidden/>
+    <input type="text" id="typeId" name="typeId" value="@typeId" hidden />
+    <div class="panel panel-primary" onload="myFunction()">
+        <div class="panel-heading">
+            <div style="text-align:center">
+                <span class="fa-stack fa-2x" style="color:#808080">
+                    <i class="fa fa-circle  fa-stack-2x"></i>
+                    <strong class="fa-stack-1x   " style="color:white">1</strong>
+                </span>
+                <span class="fa-stack fa-3x" style="color:#640808">
+                    <i class="fa fa-circle faa-pulse  animated fa-stack-2x"></i>
+                    <strong class="fa-stack-1x " style="color:white">2</strong>
+                </span>
+                <span class="fa-stack fa-2x" style="color:#808080">
+                    <i class="fa fa-circle  fa-stack-2x"></i>
+                    <strong class="fa-stack-1x   " style="color:white">3</strong>
+                </span>
+            </div>
+        </div>
+
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(s => s.PersonProfileId)
+            <div class="panel-body">
+
+                @if (ViewBag.Isactive == true)
+                {
+                    <div class="alert alert-success row ">
+                        <div class="col-md-2">
+                            @Html.LabelFor(m => Model.IsInvitation, new { @class = "control-label  " })
+                            @Html.CheckBoxFor(m => m.IsInvitation)
+                            <span>
+                                @Html.ValidationMessageFor(m => m.IsInvitation)
+                            </span>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group" style="margin-bottom: 10px">
+
+                                @Html.DropDownList("ID_Invitation", null, "   عنوان فرآخوان    را انتخاب کنید", new { @class = "form-control  input-lg" })
+                            </div>
+                        </div>
+                    </div>
+
+                }
+                <div class="row">
+
+                    <div class="col-md-2 ">
+                        <span style="color:#a70808" class="glyphicon glyphicon-star-empty faa-ring animated ">   &nbsp;   </span>
+                        <b>نوع پیشنهاد</b>
+                        <div class="input-group">
+                            @Html.DropDownList("ID_PeopleType", null, " ---نوع پیشنهاد را انتخاب  کنید---", new { @placeholder = "  نوع پیشنهاد    ", @class = "form-control required input-lg" })
+                        </div>
+                        <span>
+                            @Html.ValidationMessageFor(model => model.ID_PeopleType, "", new { @class = "text-danger" })
+                        </span>
+                    </div>
+                    <div class="col-md-3 Ishiddp">
+                        <span style="color:#a70808" class="glyphicon glyphicon-star-empty faa-ring animated ">   &nbsp;   </span>
+                        <b>نام و نام خانوادگی اعضاء</b>
+                        <div class="input-group" style="margin-bottom: 10px">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user-circle fa-2x">
+                                </i>
+                            </span>
+                            @Html.TextAreaFor(model => model.OtherMem, new { @class = "form-control input-lg", placeholder = "نام و نام خانوادگی اعضاء  ", autocomplete = "off" })
+                        </div>
+                        <b>
+                            @Html.ValidationMessageFor(model => model.OtherMem, "", new { @class = "text-danger" })
+                        </b>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        @Html.LabelFor(m => Model.SuggestTitle, new { @class = "control-label  " })
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user fa-2x">
+                                </i>
+                            </span>
+                            @Html.TextBoxFor(model => model.SuggestTitle, new { @class = "form-control input-lg ", placeholder = "  عنوان پیشنهاد  ", autocomplete = "off" })
+                        </div>
+                        <span>
+                            @Html.ValidationMessageFor(m => m.SuggestTitle)
+                        </span>
+                    </div>
+                    <div class="col-md-3">
+                        @Html.LabelFor(m => Model.CurrentSituationNote, new { @class = "control-label  " })
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user fa-2x">
+                                </i>
+                            </span>
+                            @Html.TextAreaFor(model => model.CurrentSituationNote, new { @class = "form-control input-lg ", placeholder = "وضعیت موجود   ", autocomplete = "off" })
+                        </div>
+                        <span>
+                            @Html.ValidationMessageFor(m => m.CurrentSituationNote)
+                        </span>
+                    </div>
+                    <div class="col-md-5">
+                        @Html.LabelFor(m => Model.SuggestNote, new { @class = "control-label  " })
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user fa-2x">
+                                </i>
+                            </span>
+                            @Html.TextAreaFor(model => model.SuggestNote, new { @class = "form-control input-lg ", placeholder = " وضعیت مطلوب (شرح پیشنهاد)  ", autocomplete = "off" })
+                        </div>
+                        <span>
+                            @Html.ValidationMessageFor(m => m.SuggestNote)
+                        </span>
+                    </div>
+
+                </div>
+                <div class="row">
+
+                    <div class="col-md-5">
+                        @Html.LabelFor(m => Model.Result, new { @class = "control-label  " })
+
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user fa-2x">
+                                </i>
+                            </span>
+                            @Html.TextAreaFor(model => model.Result, new { @class = "form-control input-lg ", placeholder = "  مزایای روش پیشنهادی    ", autocomplete = "off" })
+                        </div>
+                        <span>
+                            @Html.ValidationMessageFor(m => m.Result)
+                        </span>
+                    </div>
+
+
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <b>  در صورتی که میزان صرفه جویی اقتصادی حاصل از اجرای پیشنهاد قابل محاسبه است، مبلغ حاصل از سال اول اجرای آن را به صورت دقیق همراه نحوه محاسبه ارائه نمایید.</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user fa-2x">
+                                </i>
+                            </span>
+                            @Html.TextBoxFor(model => model.Cost, new { @class = "form-control input-lg ", placeholder = " میزان اعتبار برآورد شده  ", autocomplete = "off" })
+                        </div>
+                        <span>
+                            @Html.ValidationMessageFor(m => m.Cost)
+                        </span>
+                    </div>
+                    <div class="col-md-4">
+                        <b>نحوه محاسبه هزینه</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user fa-2x">
+                                </i>
+                            </span>
+                            @Html.TextBoxFor(model => model.Note_Cost, new { @class = "form-control input-lg ", placeholder = "      نحوه محاسبه هزینه    ", autocomplete = "off" })
+                        </div>
+                        <span>
+                            @Html.ValidationMessageFor(m => m.Note_Cost)
+                        </span>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="center col-md-3">
+                        <b>   مدت زمان مورد نیاز(بر اساس تعداد ماه)</b>
+                        <p>
+                        </p><div class="input-group">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-danger btn-number input-lg" data-type="minus" data-field="PeriodOfTime">
+                                    <span class="glyphicon glyphicon-minus"></span>
+                                </button>
+                            </span>
+                            <input type="text" name="PeriodOfTime" id="PeriodOfTime" class="form-control input-number input-lg" value="@Model.PeriodOfTime" min="1" max="100">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-success btn-number input-lg" data-type="plus" data-field="PeriodOfTime">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </button>
+                            </span>
+                        </div>
+                        <p></p>
+                    </div>
+                   
+                    <div class="col-md-4">
+                        <b> امکانات و تجهیزات مورد نیاز</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user fa-2x">
+                                </i>
+                            </span>
+                            @Html.TextAreaFor(model => model.Equipment, new { @class = "form-control input-lg ", placeholder = " امکانات و تجهیزات مورد نیاز    ", autocomplete = "off" })
+                        </div>
+                        <span>
+                            @Html.ValidationMessageFor(m => m.Equipment)
+                        </span>
+                    </div>
+                    <div class="col-md-5">
+                        <b>  منافع حاصله از پیشنهاد</b>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user fa-2x">
+                                </i>
+                            </span>
+                            @Html.TextAreaFor(model => model.Benefits, new { @class = "form-control input-lg ", placeholder = " منافع حاصله از پیشنهاد ", autocomplete = "off" })
+                        </div>
+                        <span>
+                            @Html.ValidationMessageFor(m => m.Benefits)
+                        </span>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="panel-footer">
+                <div class="alert alert-warning">
+                    <div style="text-align:left">
+                        <input type="submit" class="btn btn-success" value="ثبت تغییرات و ادامه مراحل" />|
+                        <a class="btn btn-warning" onclick="location.href='@Url.Action("Details", "PersonProfiles",new {id=Id })';return false;">   انصراف و بازگشت    <i class="fa fa-backward"></i></a>
+                        |
+                        <a class="btn btn-danger" onclick="location.href='@Url.Action("Search", "PersonProfiles")';return false;">خروج    <i class="fa fa-sign-out"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+
+        if ($('#typeId').val() == 2) {
+            $('.Ishidd').fadeOut();
+        }
+        $('input#Cost').keyup(function (event) {
+            // skip for arrow keys
+            if (event.which >= 37 && event.which <= 40) return;
+
+            // format number
+            $(this).val(function (index, value) {
+                return value
+                    .replace(/\D/g, "")
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                    ;
+            });
+        });
+    </script>
+    <script>
+        jQuery('input').iCheck({
+            checkboxClass: 'icheckbox_square-red',
+            radioClass: 'iradio_square-red',
+            increaseArea: '20%' // optional
+        });
+
+    </script>
+    <script type="text/javascript">
+        (function ($) {
+            $.validator.unobtrusive.adapters.addBool("checkboxrequired", "required");
+        }(jQuery));
+    </script>
+    <script>
+        //plugin bootstrap minus and plus
+        //http://jsfiddle.net/laelitenetwork/puJ6G/
+        $('.btn-number').click(function (e) {
+            e.preventDefault();
+
+            fieldName = $(this).attr('data-field');
+            type = $(this).attr('data-type');
+            var input = $("input[name='" + fieldName + "']");
+            var currentVal = parseInt(input.val());
+            if (!isNaN(currentVal)) {
+                if (type == 'minus') {
+
+                    if (currentVal > input.attr('min')) {
+                        input.val(currentVal - 1).change();
+                    }
+                    if (parseInt(input.val()) == input.attr('min')) {
+                        $(this).attr('disabled', true);
+                    }
+
+                } else if (type == 'plus') {
+
+                    if (currentVal < input.attr('max')) {
+                        input.val(currentVal + 1).change();
+                    }
+                    if (parseInt(input.val()) == input.attr('max')) {
+                        $(this).attr('disabled', true);
+                    }
+
+                }
+            } else {
+                input.val(0);
+            }
+        });
+        $('.input-number').focusin(function () {
+            $(this).data('oldValue', $(this).val());
+        });
+        $('.input-number').change(function () {
+
+            minValue = parseInt($(this).attr('min'));
+            maxValue = parseInt($(this).attr('max'));
+            valueCurrent = parseInt($(this).val());
+
+            name = $(this).attr('name');
+            if (valueCurrent >= minValue) {
+                $(".btn-number[data-type='minus'][data-field='" + name + "']").removeAttr('disabled')
+            } else {
+                alert('Sorry, the minimum value was reached');
+                $(this).val($(this).data('oldValue'));
+            }
+            if (valueCurrent <= maxValue) {
+                $(".btn-number[data-type='plus'][data-field='" + name + "']").removeAttr('disabled')
+            } else {
+                alert('Sorry, the maximum value was reached');
+                $(this).val($(this).data('oldValue'));
+            }
+
+
+        });
+        $(".input-number").keydown(function (e) {
+            // Allow: backspace, delete, tab, escape, enter and .
+            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                // let it happen, don't do anything
+                return;
+            }
+            // Ensure that it is a number and stop the keypress
+            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            }
+        });
+    </script>
+
+}
+
+

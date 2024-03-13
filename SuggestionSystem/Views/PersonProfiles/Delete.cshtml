@@ -1,0 +1,192 @@
+﻿@model SuggestionSystem.Models.PersonProfile
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>PersonProfile</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Degree.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Degree.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberType.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberType.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Post.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Post.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FatherName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FatherName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NationalCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NationalCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mobile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mobile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BirthDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BirthDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reshte)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reshte)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateUpload)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateUpload)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimeUpload)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeUpload)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateEdit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateEdit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TImeEdit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TImeEdit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostOrgans)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostOrgans)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Isshow)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Isshow)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ConfirmPassword)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConfirmPassword)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherMem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OtherMem)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

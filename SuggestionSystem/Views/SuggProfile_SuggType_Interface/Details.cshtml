@@ -1,0 +1,138 @@
+﻿@model SuggestionSystem.Models.SuggProfile_SuggType_Interface
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SuggProfile_SuggType_Interface</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PartType.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PartType.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SuggestProfil.Benefits)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SuggestProfil.Benefits)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SuggestType.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SuggestType.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LetterNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LetterNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note_Secretariate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note_Secretariate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note_Referee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note_Referee)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Point)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Point)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserInsert)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserInsert)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateInsert)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateInsert)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimeInsert)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeInsert)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

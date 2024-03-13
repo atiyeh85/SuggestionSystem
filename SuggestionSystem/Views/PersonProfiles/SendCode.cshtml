@@ -1,0 +1,67 @@
+﻿@model SuggestionSystem.Models.Search
+<style>
+    body {
+        font-family: Tahoma;
+        font-size: larger
+    }
+
+    span {
+        color: red;
+        font-size: small
+    }
+</style>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div>
+
+    </div>
+    <div class="row col-md-6 col-lg-offset-3">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h4 style="color:#106641">
+                   ارسال کلمه عبور
+                </h4>
+            </div>
+            <div class="panel-body">
+
+                <div class="col-md-12">
+                    <div class="login-button" style="text-align:center">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <span style="color:#a70808" class="icon-star-empty "> </span>
+                    کد ملی
+                    <div class="input-group" style="margin-bottom: 10px">
+                        <span class="input-group-addon">
+                            <i class="fa fa-user-circle fa-2x">
+                            </i>
+                        </span>
+                        @Html.TextBoxFor(model => model.NationalCode, new { @class = "form-control input-lg", placeholder = "  کد ملی    " })
+                    </div>
+                    <b>
+                        @Html.ValidationMessageFor(model => model.NationalCode, "", new { @class = "text-danger" })
+                    </b>
+                </div>
+                <div class="col-md-12">
+                    <span style="color:#a70808" class="icon-star-empty "> </span>
+                    شماره تلفن همراه
+                    <div class="input-group" style="margin-bottom: 10px">
+                        <span class="input-group-addon">
+                            <i class="fa fa-user-circle fa-2x">
+                            </i>
+                        </span>
+                        @Html.PasswordFor(model => model.Mobile, new { @class = "form-control input-lg required", placeholder = "  شماره تلفن همراه" })
+                    </div>
+                    <b>
+                        @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+                    </b>
+                </div>
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-large btn-block blue">ورود   <i class=" fa fa-arrow-left"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

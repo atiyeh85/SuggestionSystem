@@ -1,0 +1,447 @@
+﻿@model IEnumerable<SuggestionSystem.Models.SuggestProfilVm>
+
+@{
+    Layout = null;
+    ViewBag.Title = "..: پرینت اطلاعات:..";
+    var today = SuggestionSystem.Utility.PertionDate.Today();
+    var Sugg = (IEnumerable<SuggestionSystem.Models.SuggProfile_SuggType_Interface>)ViewBag.SuggProfile_SuggType_Interface;
+}
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/Site.css" rel="stylesheet" />
+<link href="~/Content/style.css" rel="stylesheet" />
+<link href="~/Content/fontawesome.min.css" rel="stylesheet" />
+<link href="~/Content/fontawesome-all.min.css" rel="stylesheet" />
+<link href="~/Content/font-awesome-ie7.min.css" rel="stylesheet" />
+<link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+@Scripts.Render("~/bundles/modalform")
+
+@Scripts.Render("~/bundles/jqueryvalUnobtrusive")
+@Styles.Render("~/Content/themes/base/css")
+@Scripts.Render("~/bundles/bootstrap")
+<head>
+    <style media="print">
+        .btn {
+            display: none;
+        }
+
+        .navbar-header {
+            display: none;
+        }
+
+        .header {
+            display: none;
+        }
+
+        body {
+        }
+    </style>
+    <style>
+        .Mystyle6 {
+            font-weight: bold;
+        }
+
+        .m1 {
+            color: #0e59aa;
+            font-size: medium
+        }
+
+        .contract {
+            background-color: #ff6a00
+        }
+
+        .Mystyle3 {
+            color: #d8ad07;
+            font-weight: bold
+        }
+
+        .Mystyle4 {
+            font-weight: bold;
+            color: #ff0000;
+        }
+
+        .Mystyle {
+            font-weight: bold;
+            color: #0ec30c;
+        }
+
+        .Mystyle5 {
+            color: #310986;
+            font-weight: bold
+        }
+
+        #logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .myst2 {
+            text-align: justify;
+            text-justify: inter-word
+        }
+
+        myst {
+            border-style: dotted;
+        }
+
+        .myst {
+            border-style: dotted;
+        }
+
+        thead {
+            font-family: B Titr;
+            color: red;
+        }
+
+        .alert {
+            padding: 5px;
+        }
+
+
+
+        table {
+            border-collapse: collapse;
+            /*width: 100%;*/
+            background-color: white;
+            font-size: small;
+            font-family: Tahoma;
+        }
+
+        th, td {
+            padding: 2px;
+            text-align: right;
+            vertical-align: top;
+            font-family: Tahoma;
+            font-size: 13px;
+        }
+
+        h4 {
+            font-family: 'B Titr';
+        }
+
+        h5 {
+            font-family: 'B Titr';
+        }
+
+        li {
+            list-style: none;
+            padding: 1px;
+            margin: 1px;
+        }
+
+        pre {
+            height: 20px;
+        }
+
+        img {
+            width: 125px;
+            height: 105px;
+        }
+    </style>
+    <title></title>
+    <script type="text/javascript">
+
+        function PrintDoc() {
+
+            var toPrint = document.getElementById('printarea');
+
+            var popupWin = window.open('', '_blank', 'width=800,height=650,location=no,center=200px');
+            popupWin.document.open();
+            //popupWin.document.write('<html><title>::پیش نمایش::</title><link rel="stylesheet" type="text/css" href="print.css" /></head><body onload="window.print()">')
+            popupWin.document.write('<title>::پیش نمایش::</title><link rel="stylesheet" type="text/css" href="print.css" /></head><body onload="window.print()">')
+            popupWin.document.write(toPrint.innerHTML);
+            popupWin.document.write('</html>');
+            popupWin.document.close();
+        }
+    </script>
+
+</head>
+<body id="printarea">
+    <script>
+        $(document).ready(function () {
+            $('ul#tools').prepend('<li class="print"><a href="#print">Click me to print</a></li>');
+            $('ul#tools li.print a').click(function () {
+                window.print();
+                return false;
+            });
+        });
+    </script>
+    <form id="form1">
+        <div dir="rtl">
+            <div align="center">
+
+                <div style="width: 670px;height:auto;  border:3px double; border-color: #808080; position: relative;top:5px">
+                    @foreach (var item in Model)
+                    {
+                        <table width="100%">
+                            <thead>
+                                <tr>
+                                    <td colspan="3" style="">
+                                        <div id="logo-container">
+                                            <img src="~/Content/FireLogo.jpg" id="image1" />
+                                        </div>
+                                    </td>
+                                    <td style="position:absolute;top:20px;left:20px">
+                                        <ul>
+                                            <li>
+                                                <b style="font-family:'B Nazanin';font-size:15px ">
+                                                    تاریخ ثبت پیشنهاد:&nbsp;&nbsp;&nbsp;&nbsp;@item.InsertDate
+                                                </b>
+
+
+                                            </li>
+                                            <li>
+                                                <b style="font-family:'B Nazanin';font-size:15px ">
+                                                    تاریخ:&nbsp;&nbsp;&nbsp;&nbsp;@item.Date
+                                                </b>
+
+
+                                            </li>
+                                            <li>
+                                                <b style="font-family:'B Nazanin';font-size:15px ">
+                                                    شماره:
+                                                    @item.LetterNumber
+                                                </b>
+
+                                            </li>
+                                            <li>
+                                                @if (item.Image != null)
+                                                {
+                                                    <b style="font-family:'B Nazanin';font-size:15px;direction:ltr">
+                                                        پیوست:&nbsp;&nbsp;دارد
+                                                    </b>
+                                                }
+                                                else
+                                                {
+                                                    <b style="font-family:'B Nazanin';font-size:15px;direction:ltr">
+                                                        پیوست:&nbsp;&nbsp;ندارد
+                                                    </b>
+
+                                                }
+                                            </li>
+
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"><br /></td>
+                                </tr>
+                            </thead>
+
+                        </table>
+                        <div class="form-horizontal">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <table>
+                                        <tbody>
+                                            <tr class="Mystyle3">
+                                                <td> @Html.DisplayNameFor(model => model.FullName) &nbsp;&nbsp;&nbsp;</td>
+                                                <td>
+                                                    @item.FullName &nbsp;&nbsp;&nbsp; @item.Title_MemberType  &nbsp;&nbsp;&nbsp; @item.Title_Post
+
+                                                </td>
+                                            </tr>
+                                            <tr class="Mystyle3">
+                                                <td> مدرک تحصیلی/رشته &nbsp;&nbsp;&nbsp;</td>
+                                                <td>
+                                                    @item.Title_Degree  &nbsp;&nbsp;&nbsp; @item.Reshte
+                                                </td>
+                                            </tr>
+                                            <tr class="Mystyle3">
+                                                <td>   شماره تلفن همراه  &nbsp;&nbsp;&nbsp;</td>
+                                                <td> @item.Mobile</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <br />
+                                                </td>
+                                            </tr>
+                                            <tr class="Mystyle4">
+                                                <td>  وضعیت پیشنهاد&nbsp;&nbsp;&nbsp;</td>
+                                                <td>   @item.Title_SuggestType</td>
+                                            </tr>
+                                            <tr class="Mystyle4">
+                                                <td>   شرح پیشنهاد&nbsp;&nbsp;&nbsp;</td>
+                                                <td>   @item.SuggestNote</td>
+                                            </tr>
+                                            <tr class="Mystyle4">
+                                                <td>
+                                                    @Html.DisplayNameFor(model => model.Title_Domain)
+                                                    &nbsp;&nbsp;&nbsp;
+                                                </td>
+                                                <td>   @item.Title_Domain</td>
+                                            </tr>
+                                            <tr class="Mystyle4">
+                                                <td>
+                                                    @Html.DisplayNameFor(model => model.CurrentSituationNote)
+
+                                                    &nbsp;&nbsp;&nbsp;
+                                                </td>
+                                                <td>   @item.CurrentSituationNote</td>
+                                            </tr>
+                                            <tr class="Mystyle4">
+                                                <td>
+                                                    @Html.DisplayNameFor(model => model.Cost)
+
+
+                                                    &nbsp;&nbsp;&nbsp;
+                                                </td>
+                                                <td>   @item.Cost</td>
+                                            </tr>
+                                            <tr class="Mystyle4">
+                                                <td>
+                                                    @Html.DisplayNameFor(model => model.Result)
+                                                    &nbsp;&nbsp;&nbsp;
+                                                </td>
+                                                <td>  @item.Result</td>
+
+                                            </tr>
+                                            @foreach (var i in Sugg)
+                                            {
+
+                                                if (i.ID_Part == 1)
+                                                {
+
+                                                    <tr>
+                                                        <td colspan="2"><br /></td>
+                                                    </tr>
+                                                    <tr class="Mystyle5">
+                                                        <td>
+                                                            توضیحات - دبیرخانه
+                                                            &nbsp;&nbsp;&nbsp;
+                                                        </td>
+                                                        <td> @i.Note_Secretariate</td>
+                                                    </tr>
+                                                    <tr class="Mystyle5">
+                                                        <td>
+                                                            وضعیت پیشنهاد
+
+                                                            &nbsp;&nbsp;&nbsp;
+                                                        </td>
+                                                        <td>
+                                                            @i.SuggestType.Title
+                                                        </td>
+                                                    </tr>
+                                                }
+                                                if (i.ID_Part == 2)
+                                                {
+                                                    <tr>
+                                                        <td colspan="2"><br /></td>
+                                                    </tr>
+                                                    <tr class="Mystyle">
+                                                        <td>
+                                                            تاریخ صورتجلسه
+
+
+                                                            &nbsp;&nbsp;&nbsp;
+                                                        </td>
+                                                        <td>
+                                                            @i.Date
+
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="Mystyle">
+                                                        <td>
+                                                            شماره صورتجلسه
+                                                            &nbsp;&nbsp;&nbsp;
+                                                        </td>
+                                                        <td>
+                                                            @i.LetterNumber
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="Mystyle">
+                                                        <td>
+                                                            توضیحات - داوران
+
+                                                            &nbsp;&nbsp;&nbsp;
+                                                        </td>
+                                                        <td>
+                                                            @i.Note_Referee
+
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="Mystyle">
+                                                        <td>
+                                                            وضعیت پیشنهاد
+
+                                                            &nbsp;&nbsp;&nbsp;
+                                                        </td>
+                                                        <td>
+                                                            @i.SuggestType.Title
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="Mystyle">
+                                                        <td>
+                                                            <b>
+                                                                مجموع امتیاز
+                                                            </b>
+
+                                                            &nbsp;&nbsp;&nbsp;
+                                                        </td>
+                                                        <td>
+                                                            @i.Point
+
+                                                        </td>
+                                                    </tr>
+
+                                                }
+                                            }
+                                            <tr>
+                                                <td colspan="3"><hr  style="border-right-color:#310986; border-style:double;border-width: medium;"/></td>
+                                            </tr>
+                                            <tr class="Mystyle6">
+                                                <td>
+                                                    <p>عضو کمیته</p>
+                                                    <p> داریوش عارف منش </p>
+
+                                                </td>
+                                                <td>
+                                                    <p>عضو کمیته</p>
+                                                    <p> محمد دنیاعلی </p>
+
+                                                </td>
+
+                                                <td>
+                                                    <p>عضو کمیته</p>
+                                                    <p> اباذر اسفندیاری </p>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">
+                                                    <br />
+                                                    <br />
+                                                </td>
+                                            </tr>
+                                            <tr class="Mystyle6">
+
+                                                <td>
+                                                    <p>
+                                                        دبیر کمیته
+                                                    </p>
+                                                    <p> سمانه مفیدی  </p>
+                                                </td>
+                                                <td>
+                                                    <p>
+                                                        رئیس کمیته
+                                                    </p>
+                                                    <p> علیرضا رحمانی   </p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+</body>

@@ -1,0 +1,277 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>سامانه ثبت ایده شهرداری قزوین   | صفحه اصلی</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Jaunt Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Scripts/adminlte")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome-ie7.min.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/fontawesome-all.min.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome-ie7.min.css" rel="stylesheet" />
+    <link href="~/Content/fontawesome-all.min.css" rel="stylesheet" />
+    <link href="~/Content/skins/square/_all.css" rel="stylesheet" />
+    <script src="~/Scripts/kamadatepicker.js"></script>
+    <script src="~/Scripts/kamadatepicker.holidays.js"></script>
+    <link href="~/Content/kamadatepicker.min.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modalform")
+    @Scripts.Render("~/bundles/jqueryvalUnobtrusive")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
+            });
+        });
+    </script>
+    <!-- //end-smoth-scrolling -->
+    <script src="~/Scripts/modernizr.custom.js"></script>
+    <!--banner Slider starts Here-->
+    <script src="~/Scripts/responsiveslides.min.js"></script>
+    <!--strikty navgation script start here-->
+    <script>
+        $(function () {
+
+            // grab the initial top offset of the navigation
+            var sticky_navigation_offset_top = $('#sticky_navigation').offset().top;
+
+            // our function that decides weather the navigation bar should have "fixed" css position or not.
+            var sticky_navigation = function () {
+                var scroll_top = $(window).scrollTop(); // our current vertical position from the top
+
+                // if we've scrolled more than the navigation, change its position to fixed to stick to top, otherwise change it back to relative
+                if (scroll_top > sticky_navigation_offset_top) {
+                    $('#sticky_navigation').css({ 'position': 'fixed', 'top': 0, 'right': 0 });
+                } else {
+                    $('#sticky_navigation').css({ 'position': 'relative' });
+                }
+            };
+
+            // run our function on load
+            sticky_navigation();
+
+            // and run it again every time you scroll
+            $(window).scroll(function () {
+                sticky_navigation();
+            });
+
+            // NOT required:
+            // for this demo disable all links that point to "#"
+            $('a[href="#"]').click(function (event) {
+                event.preventDefault();
+            });
+
+        });
+    </script>
+    <!--sticky navgation script end here-->
+</head>
+
+<body>
+    <style>
+        .table-striped > tbody > tr:nth-child(2n+1) {
+            background-color: #dbdbdb;
+        }
+       
+        .container {
+            width: 100%;
+        }
+
+        .bd-dropdown select {
+            width: 100%;
+            height: 37px !important;
+            border: none;
+            cursor: pointer;
+        }
+        body {
+            padding: 0px;
+            margin: 0px;
+        }
+        .modal-header {
+            padding: 15px;
+            border-bottom: 1px solid #8b1919;
+            background-color: #840c0e;
+        }
+
+        .h-strip {
+            background: #3E8FBA;
+            padding: 1em 0px;
+        }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: #2ea39a;
+        }
+
+        .navbar-inverse {
+            background-color: #f1e7d5;
+            border-color: #3eb9ae;
+        }
+
+        .input-group-addon {
+            font-size: 14px;
+            font-weight: normal;
+            line-height: 1;
+            color: #707375;
+            text-align: center;
+        }
+
+        .contant-main {
+            padding: 4em 0px 4em 0px;
+            text-align: center;
+        }
+
+        .input-group-addon {
+            color: #707375;
+            text-align: center;
+        }
+
+        .modal {
+            z-index: 30000;
+        }
+
+        #sticky_navigation {
+            z-index: 10000;
+        }
+
+        .mystyle {
+            font-family: 'A EntezareZohoor 6 **';
+        }
+    </style>
+
+    <div id="demo_top_wrapper">
+        <div id="demo_top">
+            <div id="top" class="callbacks_container">
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <!--banner Slider Ends Here-->
+        <!--header banner end sss here-->
+        <!--header strip start here-->
+        <div id="sticky_navigation_wrapper">
+            <div id="sticky_navigation">
+                <div class="h-strip">
+                    <div class="container">
+                        <div class="h-strip-main">
+                            <div class="h-strip-logo">
+
+                                <div class="clearfix"> </div>
+                            </div>
+                            <!-- top-nav -->
+                            <span class="menu"> </span>
+                            <div class="cleary"> </div>
+                            <div class="top-strip">
+                                <nav class="cl-effect-4">
+                                    <ul class="top-nav">
+
+                                        <li><a href="/PersonProfiles/search" title="  خانه"><i class="fa fa-home "></i>   </a></li>
+                                        @if (User.Identity.IsAuthenticated)
+                                        {
+                                            <li><a href="/SuggestProfils/Index" title=" لیست پیشنهاد دهندگان  "><i class="fa fa-list"></i>   </a></li>
+
+                                        }
+                                        <li><a href="/Home/Contact" title="ارتباط با ما"><i class="fa fa-phone "></i>   </a></li>
+                                        @Html.Partial("_LoginPartial")
+
+                                    </ul>
+                                </nav>
+                            </div>
+                            <!--ترجمه شده توسط مرجع تخصصی برنامه نویسان-->
+                            <script>
+                                $("span.menu").click(function () {
+                                    $(".top-strip").slideToggle("slow", function () {
+                                        // Animation complete.
+                                    });
+                                });
+                            </script>
+                            <!-- top-nav -->
+                            <div class="clearfix"> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section id="main">
+        <!--header strip end here-->
+        <!--contant start here-->
+        <!--ترجمه شده توسط مرجع تخصصی برنامه نویسان-->
+        <img src="~/Content/Banner.jpg" class="img-responsive" width="100%" />
+
+        <div class="contant">
+            <div class="container">
+                <div class="contant-main">
+                    @RenderBody();
+
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+        </div>
+        <!--contact end here-->
+        <!--ترجمه شده توسط مرجع تخصصی برنامه نویسان-->
+        <script>
+            $(document).ready(function () {
+                size_li = $("#myList li").size();
+                x = 2;
+                $('#myList li:lt(' + x + ')').show();
+                $('#loadMore').click(function () {
+                    x = (x + 1 <= size_li) ? x + 1 : size_li;
+                    $('#myList li:lt(' + x + ')').show();
+                });
+                $('#showLess').click(function () {
+                    x = (x - 1 < 0) ? 1 : x - 1;
+                    $('#myList li').not(':lt(' + x + ')').hide();
+                });
+            });
+        </script>
+
+        <!--feature grid start here-->
+        <div class="feature-grid">
+            <div class="container">
+
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="container">
+                <div class="footer-main">
+                    <div class="col-md-6 footer-right">
+                    </div>
+                    <div class="col-md-6 footer-left">
+                        <p class="footer-class"> کلیه حقوق مادی و معنوی این سامانه متعلق به سازمان فناوری اطلاعات و ارتباطات شهرداری قزوین می باشد|<a href="qazvin.ir" target="_blank">شهرداری قزوین </a> </p>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    /*
+                    var defaults = {
+                            containerID: 'toTop', // fading element id
+                        containerHoverID: 'toTopHover', // fading element hover id
+                        scrollSpeed: 1200,
+                        easingType: 'linear'
+                        };
+                    */
+
+                    $().UItoTop({ easingType: 'easeOutQuart' });
+
+                });
+            </script>
+            <a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+        </div>
+    </section>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

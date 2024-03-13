@@ -1,0 +1,117 @@
+﻿@model IEnumerable<SuggestionSystem.Models.SuggProfile_SuggType_Interface>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PartType.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SuggestProfil.Benefits)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SuggestType.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LetterNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Note_Secretariate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Note_Referee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Point)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserInsert)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateInsert)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TimeInsert)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PartType.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SuggestProfil.Benefits)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SuggestType.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LetterNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Note_Secretariate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Note_Referee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Point)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserInsert)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateInsert)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TimeInsert)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

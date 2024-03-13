@@ -1,0 +1,329 @@
+﻿@model SuggestionSystem.Models.PersonProfileVm
+
+@{
+    ViewBag.Title = "..:ویرایش اطلاعات:..";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(d => d.PersonProfileId)
+        @Html.HiddenFor(d => d.Password)
+        @Html.HiddenFor(d => d.ConfirmPassword)
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div style="text-align:center">
+                    <span class="fa-stack fa-3x" style="color:#640808">
+                        <i class="fa fa-circle faa-pulse  animated fa-stack-2x"></i>
+                        <strong class="fa-stack-1x " style="color:white">1 </strong>
+                    </span>
+                    <span class="fa-stack fa-2x" style="color:#808080">
+                        <i class="fa fa-circle  fa-stack-2x"></i>
+                        <strong class="fa-stack-1x   " style="color:white">2</strong>
+                    </span>
+                    <span class="fa-stack fa-2x" style="color:#808080">
+                        <i class="fa fa-circle  fa-stack-2x"></i>
+                        <strong class="fa-stack-1x   " style="color:white">3</strong>
+                    </span>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="alert alert-info">
+                    <div style="text-align:left">
+                        <input type="submit" class="btn btn-default" value="ثبت تغییرات و ادامه مراحل" />|
+                        <a class="btn btn-danger" onclick="location.href='@Url.Action("Search", "PersonProfiles")';return false;">خروج    <i class="fa fa-sign-out"></i></a>
+
+                    </div>
+                </div>
+                <div class="row">
+                    @if (TempData["Message"] != null)
+                    {
+                        <div class="alert alert-danger">
+                            @TempData["Message"]
+                        </div>
+                    }
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <span style="color:#a70808" class="glyphicon glyphicon-star-empty faa-ring animated ">   &nbsp;   </span>
+                        نام و نام خانوادگی
+                        <div class="input-group" style="margin-bottom: 10px">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user-circle fa-2x">
+                                </i>
+                            </span>
+                            @Html.TextBoxFor(model => model.FullName, new { @class = "form-control input-lg", placeholder = "نام و نام خانوادگی  ", autocomplete = "off" })
+                        </div>
+                        <b>
+                            @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                        </b>
+                    </div>
+
+                    <div class="col-md-2">
+                        <span style="color:#a70808" class="glyphicon glyphicon-star-empty faa-ring animated ">   &nbsp;   </span>
+                        کد ملی
+                        <div class="input-group" style="margin-bottom: 10px">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-credit-card fa-2x">
+                                </i>
+                            </span>
+                            @Html.TextBoxFor(model => model.NationalCode, new { @class = "form-control input-lg", placeholder = "  کد ملی  ", autocomplete = "off" })
+                        </div>
+                        <b>
+                            @Html.ValidationMessageFor(model => model.NationalCode, "", new { @class = "text-danger" })
+                        </b>
+                    </div>
+                    <div class="col-md-2">
+                        <span style="color:#a70808" class="glyphicon glyphicon-star-empty faa-ring animated ">   &nbsp;   </span>
+
+                        تاریخ تولد
+                        <div class="input-group" style="margin-bottom: 10px">
+                            <span class="input-group-addon">
+                                <i class="fa fa-birthday-cake fa-2x">
+                                </i>
+                            </span>
+                            @Html.TextBoxFor(model => model.BirthDate, new { @class = "form-control input-lg", placeholder = "   تاریخ تولد  ", autocomplete = "off", @id = "date2" })
+                        </div>
+                        <b>
+                            @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
+                        </b>
+                    </div>
+                    <div class="col-md-2">
+                        <span style="color:#a70808" class="glyphicon glyphicon-star-empty faa-ring animated ">   &nbsp;   </span>
+
+                        نام پدر
+                        <div class="input-group" style="margin-bottom: 10px">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user fa-2x">
+                                </i>
+                            </span>
+                            @Html.TextBoxFor(model => model.FatherName, new { @class = "form-control input-lg", placeholder = "   نام پدر   ", autocomplete = "off", @id = "date2" })
+                        </div>
+                        <b>
+                            @Html.ValidationMessageFor(model => model.FatherName, "", new { @class = "text-danger" })
+                        </b>
+                    </div>
+                    <div class="col-md-2">
+                        آدرس پست الکترونیک
+                        <div class="input-group" style="margin-bottom: 10px">
+                            <span class="input-group-addon">
+                                <i class="fa fa-envelope fa-2x">
+                                </i>
+                            </span>
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control input-lg", placeholder = "   آدرس پست الکترونیک   ", autocomplete = "off", @id = "date2" })
+                        </div>
+                        <b>
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2 ">
+                        <span style="color:#a70808" class="glyphicon glyphicon-star-empty faa-ring animated ">   &nbsp;   </span>
+                        @*نوع پیشنهاد*@
+                        <div class="input-group">
+                            @Html.DropDownList("ID_PeopleType", null, " ---نوع پیشنهاد را انتخاب  کنید---", new { @placeholder = "  نوع پیشنهاد    ", @class = "form-control required input-lg" })
+                        </div>
+                        <span>
+                            @Html.ValidationMessageFor(model => model.ID_PeopleType, "", new { @class = "text-danger" })
+                        </span>
+                    </div>
+                    <div class="col-md-3 Ishiddp">
+                        <span style="color:#a70808" class="glyphicon glyphicon-star-empty faa-ring animated ">   &nbsp;   </span>
+                        نام و نام خانوادگی اعضاء
+                        <div class="input-group" style="margin-bottom: 10px">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user-circle fa-2x">
+                                </i>
+                            </span>
+                            @Html.TextAreaFor(model => model.OtherMem, new { @class = "form-control input-lg", placeholder = "نام و نام خانوادگی اعضاء  ", autocomplete = "off" })
+                        </div>
+                        <b>
+                            @Html.ValidationMessageFor(model => model.OtherMem, "", new { @class = "text-danger" })
+                        </b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <span style="color:#a70808" class="glyphicon glyphicon-star-empty faa-ring animated ">   &nbsp;   </span>
+
+                        سطح تحصیلات
+                        <div class="input-group">
+                            @Html.DropDownList("DegreeId", null, " ---انتخاب کنید---", new { @placeholder = "  سطح تحصیلات    ", @class = "form-control required input-lg" })
+                        </div>
+                        <span>
+                            @Html.ValidationMessageFor(model => model.DegreeId, "", new { @class = "text-danger" })
+                        </span>
+                    </div>
+
+                    <div class="col-md-3">
+                        <span style="color:#a70808" class="glyphicon glyphicon-star-empty faa-ring animated ">   &nbsp;   </span>
+                        رشته تحصیلی
+                        <div class="input-group" style="margin-bottom: 10px">
+                            <span class="input-group-addon">
+                                <i class="fa fa-certificate fa-2x">
+                                </i>
+                            </span>
+                            @Html.TextBoxFor(model => model.Reshte, new { @class = "form-control input-lg", placeholder = "   رشته تحصیلی   ", autocomplete = "off" })
+                        </div>
+                        <b>
+                            @Html.ValidationMessageFor(model => model.Reshte, "", new { @class = "text-danger" })
+                        </b>
+                    </div>
+                </div>
+                <div class="row">
+                    <br />
+                    <div class="col-md-3">
+                        <span style="color:#a70808" class="glyphicon glyphicon-star-empty faa-ring animated ">   &nbsp;   </span>
+                        شماره تلفن همراه
+                        <div class="input-group" style="margin-bottom: 10px">
+                            <span class="input-group-addon">
+                                <i class="fas fa-mobile faa-ring animated fa-2x">
+                                </i>
+                            </span>
+                            @Html.TextBoxFor(model => model.Mobile, new { @class = "form-control input-lg", placeholder = " شماره تلفن همراه  ", autocomplete = "off" })
+                        </div>
+                        <b>
+                            @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+                        </b>
+                    </div>
+                    <div class="col-md-3">
+                        تلفن ثابت
+                        <div class="input-group" style="margin-bottom: 10px">
+                            <span class="input-group-addon">
+                                <i class="fas fa-phone-alt faa-ring animated fa-2x">
+                                </i>
+                            </span>
+                            @Html.TextBoxFor(model => model.Phone, new { @class = "form-control input-lg", placeholder = "  تلفن ثابت    ", autocomplete = "off" })
+                        </div>
+                        <b>
+                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                        </b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <span style="color:#a70808" class="glyphicon glyphicon-star-empty faa-ring animated ">   &nbsp;   </span>
+                        پیشنهاد دهنده
+                        <div class="input-group">
+                            @Html.DropDownList("ID_MemType", null, " ---انتخاب کنید---", new { @placeholder = "    نوع شرکت کننده ", @class = "form-control required input-lg" })
+                        </div>
+                        <span>
+                            @Html.ValidationMessageFor(model => model.ID_MemType, "", new { @class = "text-danger" })
+                        </span>
+                    </div>
+                    <div class="col-md-4 Ishidd">
+                        @*<span style="color:#a70808" class="glyphicon glyphicon-star-empty faa-ring animated ">   &nbsp;   </span>
+                            پست سازمانی
+                            <div class="input-group">
+                                @Html.DropDownList("PostId", null, " ---انتخاب کنید---", new { @placeholder = "    پست سازمانی", @class = "form-control  input-lg" })
+                            </div>
+                            <span>
+                                @Html.ValidationMessageFor(model => model.PostId, "", new { @class = "text-danger" })
+                            </span>*@
+                        پست سازمانی
+                        <span style="color:#a70808" class="glyphicon glyphicon-star-empty faa-ring animated ">   &nbsp;   </span>
+                        <div class="input-group" style="margin-bottom: 10px">
+                            <span class="input-group-addon">
+                                <i class="fas fa-user fa-2x">
+                                </i>
+                            </span>
+                            @Html.TextBoxFor(model => model.PostOrgans, new { @class = "form-control input-lg", placeholder = "   پست سازمانی   ", autocomplete = "off" })
+                        </div>
+                        <b>
+                            @Html.ValidationMessageFor(model => model.PostOrgans, "", new { @class = "text-danger" })
+                        </b>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <span style="color:#a70808" class="glyphicon glyphicon-star-empty faa-ring animated ">   &nbsp;   </span>
+
+                        کلمه عبور
+
+                        <div class="input-group" style="margin-bottom: 10px">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-lock fa-2x">
+                                </i>
+                            </span>
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control input-lg", placeholder = "   کلمه عبور  ", autocomplete = "off" })
+                        </div>
+                        <b>
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </b>
+                    </div>
+                    <div class="col-md-4">
+                        <span style="color:#a70808" class="glyphicon glyphicon-star-empty faa-ring animated ">   &nbsp;   </span>
+                        تکرار کلمه عبور
+                        <div class="input-group" style="margin-bottom: 10px">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-lock fa-2x">
+                                </i>
+                            </span>
+                            @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control input-lg", placeholder = "  تکرار کلمه عبور   ", autocomplete = "off" })
+                        </div>
+                        <b>
+                            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                        </b>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+        if ($('#ID_MemType').val() == 2) {
+            $('.Ishidd').fadeOut();
+        }
+        else if ($('#ID_MemType').val() == 1) {
+            $('.Ishidd').fadeIn();
+        }
+
+        $('#ID_MemType').change(function () {
+            if ($('#ID_MemType').val() == 2) {
+                $('.Ishidd').fadeOut();
+            }
+            else if ($('#ID_MemType').val() == 1) {
+                $('.Ishidd').fadeIn();
+            }
+        });
+
+         if ($('#ID_PeopleType').val() == 2) {
+            $('.Ishiddp').fadeOut();
+        }
+        else if ($('#ID_PeopleType').val() == 1) {
+            $('.Ishiddp').fadeIn();
+        }
+
+         $('#ID_PeopleType').change(function () {
+            if ($('#ID_PeopleType').val() == 2) {
+                $('.Ishiddp').fadeOut();
+            }
+            else if ($('#ID_PeopleType').val() == 1) {
+                $('.Ishiddp').fadeIn();
+            }
+        });
+        var customOptions = {
+            placeholder: "روز / ماه / سال"
+            , twodigit: true
+            , closeAfterSelect: true
+            , nextButtonIcon: "fa fa-arrow-circle-right"
+            , previousButtonIcon: "fa fa-arrow-circle-left"
+            , buttonsColor: "blue"
+            , forceFarsiDigits: true
+            , markToday: true
+            , markHolidays: true
+            , highlightSelectedDay: true
+            , sync: true
+            , gotoToday: true
+        }
+        kamaDatepicker('date2', customOptions);
+</script>
+
+

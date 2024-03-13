@@ -1,0 +1,121 @@
+﻿@model IEnumerable<SuggestionSystem.Models.FileUpload>
+
+
+@using MvcFileUploader.HtmlHelper
+@using MvcFileUploader.Models
+@{
+    var entityId = ViewBag.id;
+    var PProfileId = ViewBag.PProfileId;
+    var PProfileIdStr = Convert.ToString(PProfileId);
+    ViewBag.Title = "UploadDoc";
+    var showingInline = true && Model != null;
+    //option for inline view only
+    //var ui = "jquery".Equals(Request.Params["ui"]) ? UploadUI.JQueryUI : UploadUI.Bootstrap;
+    //var toggleUi = ui == UploadUI.Bootstrap ? "jquery" : "bootstrap";
+
+    //setting layout based on ui
+    //Layout = "~/Views/Shared/" + (ui == UploadUI.Bootstrap ? "_MvcFileUploaderLayout.cshtml" : "_MvcFileUploaderLayout_jui.cshtml");
+}
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <div style="text-align:center">
+
+            <span class="fa-stack fa-2x" style="color:#9b9999">
+                <i class="fa fa-circle  fa-stack-2x"></i>
+                <strong class="fa-stack-1x   " style="color:white"> 1</strong>
+            </span>
+            <span class="fa-stack fa-2x" style="color:#9b9999">
+                <i class="fa fa-circle  fa-stack-2x"></i>
+                <strong class="fa-stack-1x   " style="color:white"> 2</strong>
+            </span>
+            <span class="fa-stack fa-3x" style="color:#640808">
+                <i class="fa fa-circle faa-pulse  animated fa-stack-2x"></i>
+                <strong class="fa-stack-1x " style="color:white">3 </strong>
+            </span>
+        </div>
+    </div>
+    <div class="panel-body">
+       
+        <div class="row">
+            <div class="well">
+                <p class="help-block">حجم فایل بیشتر از3 مگابایت نباشد </p>
+                @(
+
+                                                                                        Html.MvcFileUpload()
+                                                                                        .UploadAt(Url.Action("UploadFile", "FileUploads"))
+                                                                                        .WithFileTypes(@"/(\.|\/)(pdf|xlsx|jpe?g|png|xls )$/i")
+                                                                                        //.WithFileTypes(@"/(.|/)(jpe?g|png|gif|doc|docx|docm|xls|xlsx|xlsm|csv|ppt|pptx|pdf|rtf|txt)$/i")
+                                                                                        .WithMaxFileSize(2000000)
+                                                                                         .DisableImagePreview()
+                                                                                         .MaxNumberOfFiles(3)
+                                                                                        .AddFormField("entityId", entityId)
+                                                                                         .AddFormField("PProfileIdStr", PProfileIdStr)
+                                                                                        .RenderInline("_MvcFileupload")
+
+                )
+
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="panel panel-warning">
+
+                <div class="panel panel-heading">
+                  
+                </div>
+                <div class="panel-body">
+                    @foreach (var item in Model)
+                    {
+                        if (item.Address != null)
+                        {
+                            <div class="col-md-6">
+
+                                <a href="@Url.Action("Delete", "FileUploads", new { id=item.FileId})" class=" data-modal Mystyle2" role="button"><i class="fas fa-remove fa-2x" style="color:#d71212"></i></a>
+                                @Html.ActionLink("دانلود فایل ==>>" + item.FileName, "DownlFile", new { id = item.FileId, target = "_blank" })
+                                <br />
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <div class="alert alert-warning">
+            <div style="text-align:left">
+                <a class="btn btn-warning" onclick="location.href='@Url.Action("Edit", "SuggestProfils",new { id=entityId})';return false;">بازگشت     <i class="fa fa-backward  faa-flash  animated"></i></a>
+                |
+                <a class="btn btn-danger" onclick="location.href='@Url.Action("Search", "PersonProfiles")';return false;">خروج    <i class="glyphicon glyphicon-log-out faa-ring  animated"></i></a>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+    <script>
+        var deleted = false;
+
+        $(document).delegate('.DeleteDocTitle', 'click', function (e) {
+            alert("d");
+            e.preventDefault();
+            $.ajax({
+                url: $(this).attr('data-url'),
+                method: 'post',
+                data: null,
+                success: function (data) {
+                    if (data == 'true') {
+                        $("#div-listindex").load(location.href + " #div-listindex");
+                        deleted = true;
+                    }
+                }
+            })
+        });
+    </script>

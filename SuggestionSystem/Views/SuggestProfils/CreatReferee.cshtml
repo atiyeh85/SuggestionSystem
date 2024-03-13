@@ -1,0 +1,232 @@
+﻿@model SuggestionSystem.Models.SuggProfile_SuggType_Interface
+
+@{
+    var PProfile = ViewBag.SProf;
+    ViewBag.Title = "..::..";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    @Html.HiddenFor(model => model.ID_SuggProfile)
+    @Html.HiddenFor(model => model.id)
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    <div class="panel panel-primary">
+        <div class="panel panel-heading">
+
+            <h3>  @PProfile.PersonProfile.FullName  <small style="color:aliceblue">با پیشنهاد با عنوان </small>     &nbsp;&nbsp;&nbsp;  @PProfile.SuggestTitle</h3>
+        </div>
+        <div class="panel-body">
+            <input id="SuggestId" value="@PProfile.SuggestId" hidden />
+            <div class="alert alert-info">
+                <div style="text-align:left">
+                    <input type="submit" class="btn btn-default" value="ثبت/ویرایش   " />|
+                    <a class="btn btn-warning" onclick="location.href='@Url.Action("Index", "SuggestProfils")';return false;">بازگشت     <i class="fa fa-backward"></i></a>
+                    |
+                    <a class="btn btn-danger" onclick="location.href='@Url.Action("Search", "PersonProfiles")';return false;">خروج    <i class="fa fa-sign-out"></i></a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                شماره صورت جلسه
+                                <div style="">
+                                    <div class="input-group" style="margin-bottom: 10px">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-user">
+                                            </i>
+                                        </span>
+                                        @Html.TextBoxFor(model => model.LetterNumber, new { @class = "form-control input-lg", placeholder = " شماره صورت جلسه ", autocomplete = "off" })
+                                    </div>
+                                    <b>
+                                        @Html.ValidationMessageFor(model => model.LetterNumber, "", new { @class = "text-danger" })
+                                    </b>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                تاریخ
+                                <div style="">
+                                    <div class="input-group" style="margin-bottom: 10px">
+                                        <span class="input-group-addon">
+                                            <i class="icon-user">
+                                                <i class="glyphicon glyphicon-calendar "></i>
+                                            </i>
+                                        </span>
+                                        @Html.TextBoxFor(model => model.Date, new { @class = "form-control input-lg", placeholder = " تاریخ ", autocomplete = "off", @id = "date2" })
+                                    </div>
+                                    <b>
+                                        @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                                    </b>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span style="color:#a70808" class="icon-star-empty faa-ring animated ">   &nbsp;   </span>
+                                وضعیت پیشنهاد
+                                <div class="input-group" style="margin-bottom: 10px">
+                                    @Html.DropDownList("ID_SuggType", null, "وضعیت پیشنهاد را انتخاب کنید", new { @class = "form-control input-lg" })
+                                </div>
+                                <b>
+                                    @Html.ValidationMessageFor(model => model.ID_SuggType, "", new { @class = "text-danger" })
+                                </b>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="center">
+                                    امتیاز
+                                    <div class="input-group">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-danger btn-number input-lg" data-type="minus" data-field="Point">
+                                                <span class="glyphicon glyphicon-minus"></span>
+                                            </button>
+                                        </span>
+                                        @if (Model != null)
+                                        {
+                                            <input type="text" name="Point" id="Point" class="form-control input-number input-lg" value="@Model.Point" min="1" max="100">
+
+                                        }
+                                        else
+                                        {
+                                            <input type="text" name="Point" id="Point" class="form-control input-number input-lg" value="1" min="1" max="100">
+
+                                        }
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-success btn-number input-lg" data-type="plus" data-field="Point">
+                                                <span class="glyphicon glyphicon-plus"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <p></p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                توضیحات
+                                <div style="">
+                                    <div class="input-group" style="margin-bottom: 10px">
+                                        <span class="input-group-addon">
+                                            <i class="icon-user">
+                                                <i class="fa fa-text-height "></i>
+                                            </i>
+                                        </span>
+                                        @Html.TextAreaFor(model => model.Note_Referee, new { @class = "form-control input-lg", placeholder = " توضیحات ", autocomplete = "off" })
+                                    </div>
+                                    <b>
+                                        @Html.ValidationMessageFor(model => model.Note_Referee, "", new { @class = "text-danger" })
+                                    </b>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+<script>
+
+        $('.btn-number').click(function (e) {
+            e.preventDefault();
+
+            fieldName = $(this).attr('data-field');
+            type = $(this).attr('data-type');
+            var input = $("input[name='" + fieldName + "']");
+            var currentVal = parseInt(input.val());
+            if (!isNaN(currentVal)) {
+                if (type == 'minus') {
+
+                    if (currentVal > input.attr('min')) {
+                        input.val(currentVal - 1).change();
+                    }
+                    if (parseInt(input.val()) == input.attr('min')) {
+                        $(this).attr('disabled', true);
+                    }
+
+                } else if (type == 'plus') {
+
+                    if (currentVal < input.attr('max')) {
+                        input.val(currentVal + 1).change();
+                    }
+                    if (parseInt(input.val()) == input.attr('max')) {
+                        $(this).attr('disabled', true);
+                    }
+
+                }
+            } else {
+                input.val(0);
+            }
+        });
+        $('.input-number').focusin(function () {
+            $(this).data('oldValue', $(this).val());
+        });
+        $('.input-number').change(function () {
+
+            minValue = parseInt($(this).attr('min'));
+            maxValue = parseInt($(this).attr('max'));
+            valueCurrent = parseInt($(this).val());
+
+            name = $(this).attr('name');
+            if (valueCurrent >= minValue) {
+                $(".btn-number[data-type='minus'][data-field='" + name + "']").removeAttr('disabled')
+            } else {
+                alert('Sorry, the minimum value was reached');
+                $(this).val($(this).data('oldValue'));
+            }
+            if (valueCurrent <= maxValue) {
+                $(".btn-number[data-type='plus'][data-field='" + name + "']").removeAttr('disabled')
+            } else {
+                alert('Sorry, the maximum value was reached');
+                $(this).val($(this).data('oldValue'));
+            }
+
+
+        });
+        $(".input-number").keydown(function (e) {
+            // Allow: backspace, delete, tab, escape, enter and .
+            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                // Allow: Ctrl+A
+                (e.keyCode == 65 && e.ctrlKey === true) ||
+                // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                // let it happen, don't do anything
+                return;
+            }
+            // Ensure that it is a number and stop the keypress
+            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            }
+        });
+     var customOptions = {
+        placeholder: "روز / ماه / سال"
+        , twodigit: true
+        , closeAfterSelect: true
+        , nextButtonIcon: "fa fa-arrow-circle-right"
+        , previousButtonIcon: "fa fa-arrow-circle-left"
+        , buttonsColor: "blue"
+        , forceFarsiDigits: true
+        , markToday: true
+        , markHolidays: true
+        , highlightSelectedDay: true
+        , sync: true
+        , gotoToday: true
+    }
+    kamaDatepicker('date2', customOptions);
+    kamaDatepicker('date7', customOptions);
+    kamaDatepicker('date8', customOptions);
+
+    $("#date2").val("1311/10/01");
+</script>

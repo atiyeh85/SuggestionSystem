@@ -1,0 +1,251 @@
+﻿@model SuggestionSystem.Models.PersonProfileVmEdit
+
+@{
+    ViewBag.Title = "..:ویرایش اطلاعات:..";
+}
+
+@using (Html.BeginForm("EditP", "PersonProfiles"))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(d => d.PersonProfileId)
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div style="text-align:center">
+                    <span class="fa-stack fa-3x" style="color:#640808">
+                        <i class="fa fa-circle faa-pulse  animated fa-stack-2x"></i>
+                        <strong class="fa-stack-1x " style="color:white">1 </strong>
+                    </span>
+                    <span class="fa-stack fa-2x" style="color:#808080">
+                        <i class="fa fa-circle  fa-stack-2x"></i>
+                        <strong class="fa-stack-1x   " style="color:white">2</strong>
+                    </span>
+                    <span class="fa-stack fa-2x" style="color:#808080">
+                        <i class="fa fa-circle  fa-stack-2x"></i>
+                        <strong class="fa-stack-1x   " style="color:white">3</strong>
+                    </span>
+                </div>
+            </div>
+            <div class="panel-body">
+               
+                <div class="row">
+                    @if (TempData["Message"] != null)
+                    {
+                        <div class="alert alert-danger">
+                            @TempData["Message"]
+                        </div>
+                    }
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <span style="color:#a70808" class="glyphicon glyphicon-star-empty faa-ring animated ">   &nbsp;   </span>
+                        نام و نام خانوادگی
+                        <div class="input-group" style="margin-bottom: 10px">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user-circle fa-2x">
+                                </i>
+                            </span>
+                            @Html.TextBoxFor(model => model.FullName, new { @class = "form-control input-lg", placeholder = "نام و نام خانوادگی  ", autocomplete = "off" })
+                        </div>
+                        <b>
+                            @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                        </b>
+                    </div>
+                    <div class="col-md-2">
+                        <span style="color:#a70808" class="glyphicon glyphicon-star-empty faa-ring animated ">   &nbsp;   </span>
+
+                        تاریخ تولد
+                        <div class="input-group" style="margin-bottom: 10px">
+                            <span class="input-group-addon">
+                                <i class="fa fa-birthday-cake fa-2x">
+                                </i>
+                            </span>
+                            @Html.TextBoxFor(model => model.BirthDate, new { @class = "form-control input-lg", placeholder = "   تاریخ تولد  ", autocomplete = "off", @id = "date2" })
+                        </div>
+                        <b>
+                            @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
+                        </b>
+                    </div>
+                    <div class="col-md-2">
+                        <span style="color:#a70808" class="glyphicon glyphicon-star-empty faa-ring animated ">   &nbsp;   </span>
+
+                        نام پدر
+                        <div class="input-group" style="margin-bottom: 10px">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user fa-2x">
+                                </i>
+                            </span>
+                            @Html.TextBoxFor(model => model.FatherName, new { @class = "form-control input-lg", placeholder = "   نام پدر   ", autocomplete = "off", @id = "date2" })
+                        </div>
+                        <b>
+                            @Html.ValidationMessageFor(model => model.FatherName, "", new { @class = "text-danger" })
+                        </b>
+                    </div>
+                    <div class="col-md-2">
+                        آدرس پست الکترونیک
+                        <div class="input-group" style="margin-bottom: 10px">
+                            <span class="input-group-addon">
+                                <i class="fa fa-envelope fa-2x">
+                                </i>
+                            </span>
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control input-lg", placeholder = "   آدرس پست الکترونیک   ", autocomplete = "off", @id = "date2" })
+                        </div>
+                        <b>
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </b>
+                    </div>
+                </div>
+            
+                <div class="row">
+                    <div class="col-md-3">
+                        <span style="color:#a70808" class="glyphicon glyphicon-star-empty faa-ring animated ">   &nbsp;   </span>
+
+                        سطح تحصیلات
+                        <div class="input-group">
+                            @Html.DropDownList("DegreeId", null, " ---انتخاب کنید---", new { @placeholder = "  سطح تحصیلات    ", @class = "form-control required input-lg" })
+                        </div>
+                        <span>
+                            @Html.ValidationMessageFor(model => model.DegreeId, "", new { @class = "text-danger" })
+                        </span>
+                    </div>
+
+                    <div class="col-md-3">
+                        <span style="color:#a70808" class="glyphicon glyphicon-star-empty faa-ring animated ">   &nbsp;   </span>
+                        رشته تحصیلی
+                        <div class="input-group" style="margin-bottom: 10px">
+                            <span class="input-group-addon">
+                                <i class="fa fa-certificate fa-2x">
+                                </i>
+                            </span>
+                            @Html.TextBoxFor(model => model.Reshte, new { @class = "form-control input-lg", placeholder = "   رشته تحصیلی   ", autocomplete = "off" })
+                        </div>
+                        <b>
+                            @Html.ValidationMessageFor(model => model.Reshte, "", new { @class = "text-danger" })
+                        </b>
+                    </div>
+                </div>
+                <div class="row">
+                    <br />
+                    <div class="col-md-3">
+                        <span style="color:#a70808" class="glyphicon glyphicon-star-empty faa-ring animated ">   &nbsp;   </span>
+                        شماره تلفن همراه
+                        <div class="input-group" style="margin-bottom: 10px">
+                            <span class="input-group-addon">
+                                <i class="fas fa-mobile faa-ring animated fa-2x">
+                                </i>
+                            </span>
+                            @Html.TextBoxFor(model => model.Mobile, new { @class = "form-control input-lg", placeholder = " شماره تلفن همراه  ", autocomplete = "off" })
+                        </div>
+                        <b>
+                            @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+                        </b>
+                    </div>
+                    <div class="col-md-3">
+                        تلفن ثابت
+                        <div class="input-group" style="margin-bottom: 10px">
+                            <span class="input-group-addon">
+                                <i class="fas fa-phone-alt faa-ring animated fa-2x">
+                                </i>
+                            </span>
+                            @Html.TextBoxFor(model => model.Phone, new { @class = "form-control input-lg", placeholder = "  تلفن ثابت    ", autocomplete = "off" })
+                        </div>
+                        <b>
+                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                        </b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <span style="color:#a70808" class="glyphicon glyphicon-star-empty faa-ring animated ">   &nbsp;   </span>
+                        پیشنهاد دهنده
+                        <div class="input-group">
+                            @Html.DropDownList("ID_MemType", null, " ---انتخاب کنید---", new { @placeholder = "    نوع شرکت کننده ", @class = "form-control required input-lg" })
+                        </div>
+                        <span>
+                            @Html.ValidationMessageFor(model => model.ID_MemType, "", new { @class = "text-danger" })
+                        </span>
+                    </div>
+                    <div class="col-md-4 Ishidd">
+                 
+                        پست سازمانی
+                        <div class="input-group" style="margin-bottom: 10px">
+                            <span class="input-group-addon">
+                                <i class="fas fa-user fa-2x">
+                                </i>
+                            </span>
+                            @Html.TextBoxFor(model => model.PostOrgans, new { @class = "form-control input-lg", placeholder = "   پست سازمانی   ", autocomplete = "off" })
+                        </div>
+                        <b>
+                            @Html.ValidationMessageFor(model => model.PostOrgans, "", new { @class = "text-danger" })
+                        </b>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="panel-footer">
+                <div class="alert alert-warning">
+                    <div style="text-align:left">
+                        <input type="submit" class="btn btn-warning" value="ثبت تغییرات و ادامه مراحل" />|
+                        <a class="btn btn-danger" onclick="location.href='@Url.Action("Details", "PersonProfiles",new {id=Model.PersonProfileId })';return false;">   انصراف و بازگشت    <i class="glyphicon glyphicon-log-out faa-ring  animated"></i></a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+        if ($('#ID_MemType').val() == 2) {
+            $('.Ishidd').fadeOut();
+        }
+        else if ($('#ID_MemType').val() == 1) {
+            $('.Ishidd').fadeIn();
+        }
+
+        $('#ID_MemType').change(function () {
+            if ($('#ID_MemType').val() == 2) {
+                $('.Ishidd').fadeOut();
+            }
+            else if ($('#ID_MemType').val() == 1) {
+                $('.Ishidd').fadeIn();
+            }
+        });
+       if ($('#ID_PeopleType').val() ==1) {
+            $('.Ishiddp').fadeOut();
+        }
+        else if ($('#ID_PeopleType').val() ==2) {
+            $('.Ishiddp').fadeIn();
+        }
+
+         $('#ID_PeopleType').change(function () {
+            if ($('#ID_PeopleType').val() == 1) {
+                $('.Ishiddp').fadeOut();
+            }
+            else if ($('#ID_PeopleType').val() ==2) {
+                $('.Ishiddp').fadeIn();
+            }
+        });
+        var customOptions = {
+            placeholder: "روز / ماه / سال"
+            , twodigit: true
+            , closeAfterSelect: true
+            , nextButtonIcon: "fa fa-arrow-circle-right"
+            , previousButtonIcon: "fa fa-arrow-circle-left"
+            , buttonsColor: "blue"
+            , forceFarsiDigits: true
+            , markToday: true
+            , markHolidays: true
+            , highlightSelectedDay: true
+            , sync: true
+            , gotoToday: true
+        }
+        kamaDatepicker('date2', customOptions);
+        kamaDatepicker('date7', customOptions);
+        kamaDatepicker('date8', customOptions);
+
+        $("#date2").val("1311/10/01");
+</script>
+
+
